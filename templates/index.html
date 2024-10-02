@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweet Sentiment Analysis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #222; /* Dark background */
+            color: white; /* White text */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .sentiment-positive {
+            color: white;
+            background-color: green; /* Green background for positive sentiment */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .sentiment-negative {
+            color: white;
+            background-color: red; /* Red background for negative sentiment */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .sentiment-neutral {
+            color: black;
+            background-color: yellow; /* Yellow background for neutral sentiment */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>US Election Sentiment Analysis</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="tweet">Enter a Tweet:</label>
+                <textarea class="form-control" id="tweet" name="tweet" rows="3">{{ tweet }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze</button>
+        </form>
+        {% if sentiment %}
+        <div class="mt-4">
+            <h2>Analysis Result</h2>
+            <p><strong>Sentiment:</strong> 
+                {% if sentiment == 'Positive' %}
+                    <span class="sentiment-positive">{{ sentiment }}</span>
+                {% elif sentiment == 'Negative' %}
+                    <span class="sentiment-negative">{{ sentiment }}</span>
+                {% else %}
+                    <span class="sentiment-neutral">{{ sentiment }}</span>
+                {% endif %}
+            </p>
+            <p><strong>Scores:</strong> 
+                Positive: {{ score.pos }}, Neutral: {{ score.neu }}, Negative: {{ score.neg }}
+            </p>
+            {% if plot_url_bar %}
+            <div>
+                <h3>Bar Chart</h3>
+                <img src="data:image/png;base64,{{ plot_url_bar }}" alt="Sentiment Analysis Bar Chart">
+            </div>
+            {% endif %}
+            {% if plot_url_pie %}
+            <div>
+                <h3>Pie Chart</h3>
+                <img src="data:image/png;base64,{{ plot_url_pie }}" alt="Sentiment Analysis Pie Chart">
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

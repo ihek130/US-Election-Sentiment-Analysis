@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump Analysis</title>
+    <!-- Include any necessary CSS or JavaScript libraries for your visualizations -->
+</head>
+<body>
+    <h1>Trump Analysis</h1>
+
+    <!-- Display the word cloud -->
+    <h2>Word Cloud</h2>
+    <img src="{{ url_for('static', filename='Trump_wordcloud.png') }}" alt="Trump Word Cloud">
+
+    <!-- Add sentiment distribution visualization -->
+    <h2>Sentiment Distribution</h2>
+    <!-- Add code to display sentiment distribution chart -->
+    <!-- Add sentiment distribution visualization -->
+<h2>Sentiment Distribution</h2>
+<div id="sentiment-chart"></div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    // Extract sentiment data from Flask app and pass it to JavaScript
+    var sentimentData = {{ sentiment_data | tojson }};
+
+    // Prepare data for Plotly
+    var data = [{
+        x: sentimentData.sentiments,
+        y: sentimentData.counts,
+        type: 'bar'
+    }];
+
+    // Set layout options
+    var layout = {
+        title: 'Sentiment Distribution for Trump',
+        xaxis: {
+            title: 'Sentiment'
+        },
+        yaxis: {
+            title: 'Count'
+        }
+    };
+
+    // Plot chart
+    Plotly.newPlot('sentiment-chart', data, layout);
+</script>
+
+
+    <!-- Add top words in tweets visualization -->
+    <h2>Top Words in Tweets</h2>
+    <!-- Add code to display top words in tweets chart -->
+    <!-- Add top words in tweets visualization -->
+<h2>Top Words in Tweets</h2>
+<div id="top-words-chart"></div>
+
+<script>
+    // Extract top words data from Flask app and pass it to JavaScript
+    var topWordsData = {{ top_words_data | tojson }};
+
+    // Prepare data for Plotly
+    var data = [{
+        x: topWordsData.words,
+        y: topWordsData.counts,
+        type: 'bar'
+    }];
+
+    // Set layout options
+    var layout = {
+        title: 'Top Words in Trump\'s Tweets',
+        xaxis: {
+            title: 'Words'
+        },
+        yaxis: {
+            title: 'Count'
+        }
+    };
+
+    // Plot chart
+    Plotly.newPlot('top-words-chart', data, layout);
+</script>
+
+    
+</body>
+</html>
