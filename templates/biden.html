@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biden Analysis</title>
+</head>
+<body>
+    <h1>Biden Analysis</h1>
+    <img src="{{ url_for('static', filename=biden_wordcloud) }}" alt="Biden Word Cloud">
+    
+    <h2>Top Words</h2>
+    <ul>
+        {% for word, count in biden_top_words %}
+            <li>{{ word }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Sentiment Distribution</h2>
+    <ul>
+        {% for sentiment, count in biden_sentiment.items() %}
+            <li>{{ sentiment }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

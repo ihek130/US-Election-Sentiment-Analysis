@@ -1,0 +1,50 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump Analysis</title>
+</head>
+<body>
+    <h1>Trump Analysis</h1>
+    <img src="{{ url_for('static', filename=trump_wordcloud) }}" alt="Trump Word Cloud">
+    
+    <h2>Top Words</h2>
+    <ul>
+        {% for word, count in trump_top_words %}
+            <li>{{ word }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Sentiment Distribution</h2>
+    <ul>
+        {% for sentiment, count in trump_sentiment.items() %}
+            <li>{{ sentiment }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html> {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump Analysis</title>
+</head>
+<body>
+    <h1>Trump Analysis</h1>
+    <h2>Word Cloud</h2>
+    <img src="{{ url_for('static', filename=trump_wordcloud) }}" alt="Trump Word Cloud">
+    
+    <h2>Top Words</h2>
+    <ul>
+        {% for word, count in trump_top_words %}
+            <li>{{ word }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Sentiment Distribution</h2>
+    <img src="{{ url_for('static', filename='Trump_sentiment_distribution.png') }}" alt="Trump Sentiment Distribution">
+</body>
+</html>
